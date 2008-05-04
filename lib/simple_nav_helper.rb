@@ -35,7 +35,7 @@ module SimpleNavHelper
       end
     end
     
-    (list[selected || :false][:class] ||= {}) << "selected"
+    (list[selected || :false][:class] ||= []) << "selected"
 
     content_tag :ul do
       nav_order.collect do |key|

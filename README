@@ -1,0 +1,58 @@
+SimpleNav
+=========
+
+SimpleNav is a plugin that provides helpers the make navigation display simple. 
+
+It breaks down navigation into 3 parts:
+  1. The Links that your site has for navigation
+      (all of them, regardless if they are going to show up on every request)
+  2. The order to display them for this request. This order can be any subset of the above list.
+  3. The process to select the tab that is currently marked with the "selected" css class
+      (this part is broken into a basic and advanced version)
+      
+Once you have configured the 3 parts, you can just call 
+  nav_links anywhere in your view to get your nav ul:
+  
+  <ul>
+    <li><a href="/home">Home</a></li>
+    <li class="selected"><a href="/login">Login</a></li>
+  </ul>
+  
+  
+To generate your NavigationHelper, run:
+  ./script/generate nav_helper <helper_name>
+  where <helper_name> is "navigation" or what ever word you want to use (w/o the "helper" word)
+  
+The generated helper is documented with the method stubs for the above 3 parts
+
+
+Example
+=======
+
+Here is an example of a nav helper that is being used on my blog:
+  module NavigationHelper
+    include SimpleNavHelper
+  
+    def nav_list
+      {
+        :blog => {:text => "blog", :href => '/', :class => []},
+        :resources => {:text => "resources", :href => resources_path, :class => []},
+        :about => {:text => "about", :href => about_path, :class => []},
+        :admin => {:text => "admin", :href => admin_path, :class => ["right"]}
+      }
+    end
+  
+    def nav_order
+      [:blog, :resources, :about, :admin]
+    end
+  
+    def nav_selection_hash(controller, action)
+      {
+        :pages => {[:error_404, :error_500] => :false, :else => action},
+        :posts => {[:index, :show, :search, :tags] => :blog},
+        :links => {:resources => :resources},
+        :else => :admin
+      }
+    end  
+  end
+

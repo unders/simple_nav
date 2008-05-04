@@ -1,0 +1,1 @@
+puts "Read the README in the plugin folder for instructions"

@@ -29,13 +29,13 @@ module SimpleNavHelper
       ckey = selection_hash.keys.detect {|cs| cs.is_a?(Array) ? cs.include?(controller) : cs == controller } || :else
       if selection_hash[ckey].is_a?(Hash)
         akey = selection_hash[ckey].keys.detect {|as| as.is_a?(Array) ? as.include?(action) : as == action } || :else
-        selected = selection_hash[ckey][akey]
+        selected = selection_hash[ckey][akey] || selection_hash[:else]
       else
         selected = selection_hash[ckey]
       end
     end
     
-    (list[selected || :false][:class] ||= []) << "selected"
+    (list[selected || :false][:class] ||= []  ) << "selected"
 
     content_tag :ul do
       nav_order.collect do |key|

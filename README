@@ -25,6 +25,15 @@ To generate your NavigationHelper, run:
   
 The generated helper is documented with the method stubs for the above 3 parts
 
+Namespaces
+==========
+Every nav helper method takes a "namespace" parameter as its last or only parameter.
+The namespace parameter can be used to differentiate between different sets of
+navigation links. (i.e. main nav, and sub nav)
+If you only have 1 set of nav links, ignore the namespace parameter.
+If you have multiple sets of links, you can pass the namespace to 
+the "nav_links" method to get the appropriate links for that namespace.
+Namespaces should be symbols or strings, just be consistent.
 
 Example
 =======

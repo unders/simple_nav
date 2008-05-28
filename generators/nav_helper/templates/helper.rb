@@ -1,6 +1,18 @@
 module <%= helper_name.camelcase %>
   include SimpleNavHelper
   
+  
+  # NAMESPACES
+  # ==========
+  # Every nav helper method takes a "namespace" parameter as its last or only parameter.
+  # The namespace parameter can be used to differentiate between different sets of
+  # navigation links. (i.e. main nav, and sub nav)
+  # If you only have 1 set of nav links, ignore the namespace parameter.
+  # If you have multiple sets of links, you can pass the namespace to 
+  # the "nav_links" method to get the appropriate links for that namespace.
+  # Namespaces should be symbols or strings, just be consistent.
+  
+  
   # the nav_list method defines the navigation links as a hash with its options
   # order does not matter, and note that they will only appear once listed
   # in the nav_order method
@@ -12,7 +24,7 @@ module <%= helper_name.camelcase %>
   #   :signup => {:text => "Sign Up", :href => signup_path},
   #   :settings => {:text => "Settings", :href => settings_path}
   # }
-  def nav_list
+  def nav_list(namespace)
     {}
   end
 
@@ -26,7 +38,7 @@ module <%= helper_name.camelcase %>
   # else
   #   [:home, :signup, :login]
   # end
-  def nav_order
+  def nav_order(namespace)
     []
   end
 
@@ -57,7 +69,7 @@ module <%= helper_name.camelcase %>
   # use those two variables in this method
   # Note: Use the nav_selection_advanced method below for advanced logic that can't
   #       be boiled down to the simple logic here
-  def nav_selection_hash
+  def nav_selection_hash(namespace)
     {:else => :false}
   end
 
@@ -67,7 +79,7 @@ module <%= helper_name.camelcase %>
   # it can do anything you want, if it returns a value, it should be the key
   # of the nav link you want selected. if it returns nil or false, it will try
   # to determine the selected tab from the nav_selection_hash above
-  def nav_selection_advanced
+  def nav_selection_advanced(namespace)
     nil
   end
 end

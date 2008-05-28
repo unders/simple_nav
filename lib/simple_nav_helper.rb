@@ -36,8 +36,8 @@ module SimpleNavHelper
     end
     
     (list[selected || :false][:class] ||= []  ) << "selected"
-
-    content_tag :ul, :id => "simple_nav" do
+    
+    content_tag :ul, :id => namespace, :class => "simple_nav" do
       nav_order(namespace).collect do |key|
         css_class = (list[key][:class] || []).join(" ")
         css_class = nil if css_class.empty?

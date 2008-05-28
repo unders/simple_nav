@@ -1,5 +1,7 @@
 SimpleNav
 =========
+        
+        
 
 SimpleNav is a plugin that provides helpers the make navigation display simple. 
 
@@ -27,6 +29,18 @@ The generated helper is documented with the method stubs for the above 3 parts
 
 Namespaces
 ==========
+If you are upgrading from a previous version of SimpleNav, you need to add
+a namespace parameter as the last parameter of every helper in your 
+navigation helper. Example:
+        
+  OLD:
+  def nav_list
+  def nav_selection_advanced(controller, action)
+  
+  NEW:
+  def nav_list(namespace)
+  def nav_selection_advanced(controller, action, namespace)
+
 Every nav helper method takes a "namespace" parameter as its last or only parameter.
 The namespace parameter can be used to differentiate between different sets of
 navigation links. (i.e. main nav, and sub nav)

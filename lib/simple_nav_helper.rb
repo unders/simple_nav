@@ -37,12 +37,12 @@ module SimpleNavHelper
     
     (list[selected || :false][:class] ||= []  ) << "selected"
     
-    content_tag :ul, :id => namespace, :class => "simple_nav" do
-      nav_order(namespace).collect do |key|
-        css_class = (list[key][:class] || []).join(" ")
-        css_class = nil if css_class.empty?
-        content_tag(:li, link_to(list[key][:text], list[key][:href]), :class => css_class)
-      end.join("\n")
+    li_elements = nav_order(namespace).collect do |key|
+      css_class = (list[key][:class] || []).join(" ")
+      css_class = nil if css_class.empty?
+      content_tag(:li, link_to(list[key][:text], list[key][:href]), :class => css_class)
     end
+    
+    content_tag :ul, li_elements.join("\n"), :id => namespace, :class => "simple_nav"
   end
 end
